@@ -1,0 +1,49 @@
+theme = "github_oled"
+
+
+[editor]
+mouse = false
+default-yank-register = "+"
+middle-click-paste = false
+shell = ["zsh", "-c"]
+continue-comments = false
+gutters = ["line-numbers", "spacer", "diff"]
+auto-completion = false
+path-completion = true
+auto-format = false
+auto-info = false
+bufferline = "always"
+insert-final-newline = false
+trim-final-newlines = true
+trim-trailing-whitespace = true
+clipboard-provider = "wayland"
+lsp.enable = false
+file-picker.hidden = false
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.statusline]
+left = ["mode", "file-base-name", "version-control", "read-only-indicator"]
+right = ["selections", "position"]
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "VISUAL"
+
+[editor.auto-save]
+focus-lost = true
+after-delay.enable = true
+after-delay.timeout = 30000
+
+[editor.indent-guides]
+render = true
+skip-levels = 1
+
+[editor.soft-wrap]
+enable = true
+
+
+[keys.normal]
+q = ":write-quit"

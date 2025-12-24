@@ -1,0 +1,10 @@
+.cache
+.cargo
+.config
+.mozilla
+.local/state
+.pki
+.ssh
+.var
+Downloads
+Pictures
