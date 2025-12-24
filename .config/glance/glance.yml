@@ -1,0 +1,82 @@
+server:
+  host: 127.0.0.1
+  port: 8080
+pages:
+  - name: Home
+    hide-desktop-navigation: true
+    columns:
+      - size: small
+        widgets:
+          - type: bookmarks
+            groups:
+              - links:
+                - title: Gmail
+                  url: https://mail.google.com/mail/u/0
+                - title: GitHub
+                  url: https://github.com
+                - title: Gemini
+                  url: https://gemini.google.com
+                - title: Google AI mode
+                  url: https://google.com/aimode
+                - title: YouTube
+                  url: https://youtube.com
+                - title: Reddit
+                  url: https://reddit.com
+          - type: custom-api
+            title: Steam Specials
+            cache: 12h
+            url: https://store.steampowered.com/api/featuredcategories?cc=us
+            template: |
+              <ul class="list list-gap-10 collapsible-container" data-collapse-after="5">
+              {{ range .JSON.Array "specials.items" }}
+                <li>
+                  <a class="size-h4 color-highlight block text-truncate" href="https://store.steampowered.com/app/{{ .Int "id" }}/">{{ .String "name" }}</a>
+                  <ul class="list-horizontal-text">
+                    <li>{{ div (.Int "final_price" | toFloat) 100 | printf "$%.2f" }}</li>
+                    {{ $discount := .Int "discount_percent" }}
+                    <li{{ if ge $discount 40 }} class="color-positive"{{ end }}>{{ $discount }}% off</li>
+                  </ul>
+                </li>
+              {{ end }}
+              </ul>
+
+      - size: full
+        widgets:
+          - type: group
+            widgets:
+              - type: reddit
+                subreddit: unixporn
+                show-thumbnails: true
+                collapse-after: 5
+              - type: reddit
+                subreddit: selfhosted
+
+          - type: videos
+            style: grid-cards
+            collapse-after-rows: 2
+            channels:
+              - UC1eS3zcS_vWcCAAY70xDM2Q
+              - UCxELKPgsyjaU74sdRtmWSPw
+              - UCa94PT69rdo8ErmeNfwOU5Q
+              - UCIsVwdLhYrrs3K8MOXEZdhQ
+
+      - size: small
+        widgets:
+          - type: clock
+            hour-format: 24h
+
+          - type: calendar-legacy
+            start-sunday: false
+            
+          - type: weather
+            units: metric
+            hour-format: 24h
+            location: Magnitogorsk, Russia
+
+          - type: monitor
+            title: Services
+            cache: 1m
+            style: compact
+            sites:
+              - title: Glance
+                url: http://localhost:8080

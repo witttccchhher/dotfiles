@@ -1,0 +1,175 @@
+environment {
+  DISPLAY ":0"
+  ELECTRON_OZONE_PLATFORM_HINT "auto"
+  QT_QPA_PLATFORM "wayland"
+  QT_WAYLAND_DECORATION "adwaita"
+  QT_QPA_PLATFORMTHEME "gtk3"
+  QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
+  GDK_BACKEND "wayland"
+  XDG_SESSION_TYPE "wayland"
+}
+
+input {
+  keyboard {
+    xkb {
+      layout "us,ru"
+      options "grp:caps_toggle"
+    }
+  }
+
+  touchpad {
+    off
+  }
+
+  mouse {
+    accel-profile "flat"
+  }
+
+  trackpoint {
+    off
+  }
+
+  trackball {
+    off
+  }
+
+  tablet {
+    off
+  }
+
+  touch {
+    off
+  }
+
+  focus-follows-mouse max-scroll-amount="0%"
+  warp-mouse-to-focus
+}
+
+output "HDMI-A-1" {
+  mode "1920x1080@74.973"
+  scale 1
+  transform "normal"
+  position x=0 y=0
+  focus-at-startup
+}
+
+layout {
+  gaps 0
+
+  background-color "#000000"
+
+  center-focused-column "on-overflow"
+  always-center-single-column
+
+  preset-column-widths {
+    proportion 0.5
+    proportion 1.0
+  }
+
+  preset-window-heights {
+    proportion 0.5
+    proportion 1.0
+  }
+
+  default-column-width {
+    proportion 1.0;
+  }
+
+  focus-ring {
+    off
+  }
+
+  border {
+    off
+  }
+
+  shadow {
+    off
+  }
+
+  insert-hint {
+    color "#0007"
+  }
+
+  struts {
+    left 0
+    right 0
+    top 0
+    bottom 0
+  }
+}
+
+window-rule {
+  geometry-corner-radius 0
+  clip-to-geometry true
+}
+
+screenshot-path "~/Pictures/Screenshots/Screenshot_from_%Y-%m-%d_%H-%M-%S.png"
+prefer-no-csd
+
+hotkey-overlay {
+  skip-at-startup
+}
+
+gestures {
+  hot-corners {
+    off
+  }
+}
+
+overview {
+  zoom 0.4
+  backdrop-color "#000"
+}
+
+clipboard {
+  disable-primary
+}
+
+spawn-at-startup "foot" "--server"
+spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+spawn-at-startup "openrc" "-U" "gui"
+spawn-at-startup "swaybg" "-i" "/home/seatones/Pictures/Wallpapers/solid/solid23.png" "-m" "fill"
+
+binds {
+  Mod+Return { spawn "footclient"; }
+  Mod+Space  { spawn "tofi-drun"; }
+
+  XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"; }
+  XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
+  XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+  XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+
+  Mod+Equal   allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"; }
+  Mod+Minus   allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
+  Mod+M       allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+  Mod+Shift+M allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+
+  Mod+W                { close-window; }
+  Mod+Tab repeat=false { toggle-overview; }
+
+  Mod+H { focus-column-left; }
+  Mod+J { focus-window-or-workspace-down; }
+  Mod+K { focus-window-or-workspace-up; }
+  Mod+L { focus-column-right; }
+
+  Shift+Mod+H { move-column-left; }
+  Shift+Mod+J { move-window-down-or-to-workspace-down; }
+  Shift+Mod+K { move-window-up-or-to-workspace-up; }
+  Shift+Mod+L { move-column-right; }
+
+  Mod+R       { switch-preset-column-width; }
+  Mod+Shift+R { switch-preset-window-height; }
+  Mod+Ctrl+R  { reset-window-height; }
+
+  Mod+F       { maximize-column; }
+  Mod+Shift+F { fullscreen-window; }
+
+  Mod+T       { toggle-window-floating; }
+  Mod+Shift+T { switch-focus-between-floating-and-tiling; }
+
+  Print     { screenshot; }
+  Alt+Print { screenshot-screen; }
+
+  Mod+Shift+Q { quit; }
+}
